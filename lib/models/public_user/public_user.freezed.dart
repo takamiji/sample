@@ -118,18 +118,19 @@ class __$$PublicUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PublicUserImpl implements _PublicUser {
+class _$PublicUserImpl extends _PublicUser {
   const _$PublicUserImpl(
-      {required this.followerCount,
-      required this.followingCount,
-      required this.uid});
+      {this.followerCount = 0, this.followingCount = 0, required this.uid})
+      : super._();
 
   factory _$PublicUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$PublicUserImplFromJson(json);
 
   @override
+  @JsonKey()
   final int followerCount;
   @override
+  @JsonKey()
   final int followingCount;
   @override
   final String uid;
@@ -170,11 +171,12 @@ class _$PublicUserImpl implements _PublicUser {
   }
 }
 
-abstract class _PublicUser implements PublicUser {
+abstract class _PublicUser extends PublicUser {
   const factory _PublicUser(
-      {required final int followerCount,
-      required final int followingCount,
+      {final int followerCount,
+      final int followingCount,
       required final String uid}) = _$PublicUserImpl;
+  const _PublicUser._() : super._();
 
   factory _PublicUser.fromJson(Map<String, dynamic> json) =
       _$PublicUserImpl.fromJson;
