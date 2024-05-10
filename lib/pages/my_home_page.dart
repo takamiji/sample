@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample/models/public_user.dart';
+import 'package:sample/models/public_user/public_user.dart';
 import '../flavors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,7 +17,7 @@ class MyHomePage extends StatelessWidget {
           try {
             final firstUserDocment = await FirebaseFirestore.instance
                 .collection('public_users')
-                .doc('second')
+                .doc('first')
                 .get();
             final firstUserData = firstUserDocment.data();
             if (firstUserData == null) {
