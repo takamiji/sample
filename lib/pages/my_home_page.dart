@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample/models/public_user.dart';
 import '../flavors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -14,11 +15,17 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
+            final firstUser = PublicUser(
+              followingCount: 0,
+              followerCount: 0,
+              uid: 'first',
+            );
+            final firstUserData = firstUser.toJson();
             final firstData = {"msg": "メッセージに成功しました"};
             await FirebaseFirestore.instance
-                .collection('data')
-                .doc()
-                .set(firstData);
+                .collection('public_users')
+                .doc(firstUser.uid)
+                .set(firstUserData);
           } catch (e) {
             print(e);
             print('エラーが発生しました');
